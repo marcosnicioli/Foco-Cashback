@@ -1,19 +1,11 @@
 import {
-  Boxes,
-  Brain,
-  Building2,
-  CalendarRange,
-  Cloud,
-  DollarSign,
-  FolderKanban,
-  Gauge,
-  HeartPulse,
+  BadgeCheck,
+  Banknote,
   LayoutDashboard,
-  LineChart,
-  Settings,
-  TrendingUp,
+  Upload,
   Users,
   UsersRound,
+  Wallet,
   type LucideIcon,
 } from "lucide-react";
 import type { Permission } from "@/lib/rbac/rbac.types";
@@ -28,7 +20,7 @@ export interface NavItem {
   permission?: Permission;
   /**
    * `false` = item de roadmap, ainda não implementado. Aparece com selo
-   * "Em breve" e leva a um placeholder. Ao implementar o módulo, vire `true`.
+   * "Em breve" e leva a um placeholder. Ao implementar, vire `true`.
    */
   available: boolean;
 }
@@ -39,10 +31,8 @@ export interface NavSection {
 }
 
 /**
- * Navegação principal. Os 13 módulos do escopo (ver docs/ROADMAP.md) já
- * aparecem aqui como roadmap (`available: false`). Conforme cada módulo for
- * construído, marque `available: true` — a navegação é a fonte da verdade da
- * estrutura do produto.
+ * Navegação principal do sistema de Cashback. A navegação é a fonte da verdade
+ * da estrutura do produto — ao construir uma tela nova, marque `available: true`.
  */
 export const NAV_SECTIONS: NavSection[] = [
   {
@@ -50,101 +40,40 @@ export const NAV_SECTIONS: NavSection[] = [
     items: [{ title: "Dashboard", href: "/dashboard", icon: LayoutDashboard, available: true }],
   },
   {
-    title: "Operação",
+    title: "Cashback",
     items: [
       {
-        title: "Clientes",
-        href: "/clients",
-        icon: Building2,
-        permission: "clients.read",
-        available: false,
+        title: "Consulta",
+        href: "/cashback",
+        icon: Wallet,
+        permission: "cashback.read",
+        available: true,
       },
       {
-        title: "Projetos",
-        href: "/projects",
-        icon: FolderKanban,
-        permission: "projects.read",
-        available: false,
-      },
-      {
-        title: "Recursos",
-        href: "/resources",
+        title: "Autores",
+        href: "/authors",
         icon: UsersRound,
-        permission: "resources.read",
-        available: false,
-      },
-      {
-        title: "Alocação",
-        href: "/allocation",
-        icon: CalendarRange,
-        permission: "allocation.read",
-        available: false,
-      },
-      {
-        title: "Infraestrutura",
-        href: "/infrastructure",
-        icon: Cloud,
-        permission: "infrastructure.read",
-        available: false,
+        permission: "cashback.read",
+        available: true,
       },
     ],
   },
   {
-    title: "Financeiro",
+    title: "Resgates",
     items: [
       {
-        title: "Financeiro",
-        href: "/finance",
-        icon: DollarSign,
-        permission: "finance.read",
-        available: false,
+        title: "Administração",
+        href: "/withdrawals",
+        icon: BadgeCheck,
+        permission: "withdraw.approve",
+        available: true,
       },
       {
-        title: "Rentabilidade",
-        href: "/profitability",
-        icon: TrendingUp,
-        permission: "finance.read",
-        available: false,
-      },
-      {
-        title: "Forecast",
-        href: "/forecast",
-        icon: LineChart,
-        permission: "finance.read",
-        available: false,
-      },
-    ],
-  },
-  {
-    title: "Inteligência",
-    items: [
-      {
-        title: "Health Score",
-        href: "/health-score",
-        icon: HeartPulse,
-        permission: "analytics.read",
-        available: false,
-      },
-      {
-        title: "Capacity Planning",
-        href: "/capacity",
-        icon: Gauge,
-        permission: "analytics.read",
-        available: false,
-      },
-      {
-        title: "Simulador Comercial",
-        href: "/simulator",
-        icon: Boxes,
-        permission: "analytics.read",
-        available: false,
-      },
-      {
-        title: "IA Consultiva",
-        href: "/ai-assistant",
-        icon: Brain,
-        permission: "analytics.read",
-        available: false,
+        title: "Pagamentos",
+        href: "/payments",
+        icon: Banknote,
+        permission: "withdraw.pay",
+        available: true,
       },
     ],
   },
@@ -152,17 +81,17 @@ export const NAV_SECTIONS: NavSection[] = [
     title: "Administração",
     items: [
       {
+        title: "Importação",
+        href: "/import",
+        icon: Upload,
+        permission: "import.run",
+        available: false,
+      },
+      {
         title: "Usuários",
         href: "/users",
         icon: Users,
         permission: "users.manage",
-        available: false,
-      },
-      {
-        title: "Configurações",
-        href: "/settings",
-        icon: Settings,
-        permission: "settings.manage",
         available: false,
       },
     ],

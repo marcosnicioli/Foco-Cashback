@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design tokens do FAST Operation Cockpit.
+ * Design tokens do sistema de Gestão de Cashback.
  * Edite as cores aqui (NÃO use cores fixas como `bg-blue-500` nos componentes —
  * use sempre os tokens semânticos: bg-background, text-foreground, bg-primary...).
  */
@@ -32,6 +32,15 @@
 
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
+
+  --success: #16a34a;
+  --success-foreground: #ffffff;
+
+  --warning: #d97706;
+  --warning-foreground: #ffffff;
+
+  --info: #0891b2;
+  --info-foreground: #ffffff;
 
   --border: #e2e8f0;
   --input: #e2e8f0;
@@ -63,6 +72,15 @@
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
 
+  --success: #22c55e;
+  --success-foreground: #052e16;
+
+  --warning: #f59e0b;
+  --warning-foreground: #422006;
+
+  --info: #22d3ee;
+  --info-foreground: #083344;
+
   --border: #1e293b;
   --input: #1e293b;
   --ring: #3b82f6;
@@ -86,6 +104,12 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

@@ -1,27 +1,24 @@
 -- ============================================================================
--- Migration inicial — FAST Operation Cockpit
+-- Migration inicial — Gestão de Cashback
 -- ----------------------------------------------------------------------------
--- Cria a base de autenticação por PAPÉIS (roles) da empresa.
+-- Cria a base de autenticação por PAPÉIS (roles) do sistema.
 --
 -- Este arquivo é, de propósito, a REFERÊNCIA de como fazer RLS por papel no
--- projeto. Ao criar uma tabela nova (clients, projects, resources, ...), copie
--- o padrão daqui: habilitar RLS + policies usando os helpers `is_admin()` /
--- `current_app_role()`. Veja docs/SUPABASE.md e docs/HOW-TO-CREATE-A-MODULE.md.
+-- projeto. Ao criar uma tabela nova, copie o padrão daqui: habilitar RLS +
+-- policies usando os helpers `is_admin()` / `current_app_role()`.
+-- Veja docs/SUPABASE.md e docs/HOW-TO-CREATE-A-MODULE.md.
 -- ============================================================================
 
 -- ----------------------------------------------------------------------------
 -- 1. Enum de papéis da aplicação
 -- ----------------------------------------------------------------------------
--- Papéis derivados do escopo do produto (CEO, PMs, Tech Leads, Comercial,
--- Financeiro) + 'admin' (quem administra o sistema) + 'viewer' (fallback
--- deny-by-default: vê pouco até um admin promover).
+-- Fase 1 — equipe interna:
+--   admin    → administra o sistema (pode tudo)
+--   operator → operação (consulta, solicita, aprova e paga resgates)
+--   viewer   → somente consulta (fallback deny-by-default até um admin promover)
 create type public.app_role as enum (
   'admin',
-  'ceo',
-  'pm',
-  'tech_lead',
-  'comercial',
-  'financeiro',
+  'operator',
   'viewer'
 );
 
@@ -153,6 +150,7 @@ create trigger on_auth_user_created
 create or replace function public.handle_updated_at()
 returns trigger
 language plpgsql
+set search_path = ''
 as $$
 begin
   new.updated_at = now();

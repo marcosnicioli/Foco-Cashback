@@ -103,7 +103,7 @@ Projeto solo, fluxo simples: trabalha-se **direto na `main`**.
 
 ## Papéis (RBAC)
 
-`admin`, `ceo`, `pm`, `tech_lead`, `comercial`, `financeiro`, `viewer`.
+`admin`, `operator`, `viewer` (fase 1 — equipe interna do cashback).
 Matriz de permissões em `src/lib/rbac/rbac.config.ts` (1ª camada) + RLS no banco
 (2ª camada) — devem concordar. Novos usuários entram como `viewer`.
 

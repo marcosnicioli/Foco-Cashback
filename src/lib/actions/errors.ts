@@ -12,6 +12,8 @@ export type ActionErrorCode =
   | "uniqueViolation" // 23505 — registro duplicado
   | "hasRelated" // 23503 — há registros dependentes (FK)
   | "invalidInput" // validação (Zod ou CHECK do banco)
+  | "insufficientBalance" // saldo do autor não cobre o débito/resgate
+  | "conflict" // estado inválido (ex.: aprovar resgate que não está "solicitado")
   | "forbidden" // sem permissão (RBAC ou RLS bloqueou)
   | "notFound" // registro não encontrado
   | "unexpected"; // erro não previsto (logar no servidor!)
@@ -37,6 +39,8 @@ export const ACTION_ERROR_MESSAGES: Record<ActionErrorCode, string> = {
   uniqueViolation: "Já existe um registro com esses dados.",
   hasRelated: "Não é possível concluir: há registros vinculados.",
   invalidInput: "Dados inválidos. Verifique os campos e tente novamente.",
+  insufficientBalance: "Saldo insuficiente para esta operação.",
+  conflict: "Esta operação não é possível no estado atual do resgate.",
   forbidden: "Você não tem permissão para esta ação.",
   notFound: "Registro não encontrado.",
   unexpected: "Ocorreu um erro inesperado. Tente novamente.",
@@ -62,6 +66,8 @@ export function mapPostgresError(err: unknown): ActionErrorBody {
       return { code: "uniqueViolation", constraint: e.constraint };
     case "23503":
       return { code: "hasRelated", constraint: e.constraint };
+    case "PT001": // errcode dedicado do trigger enforce_non_negative_balance
+      return { code: "insufficientBalance" };
     case "23514":
       return { code: "invalidInput", constraint: e.constraint };
     case "42501":

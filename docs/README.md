@@ -16,6 +16,7 @@ gerais) e pelo [SETUP.md](../SETUP.md) (como rodar).
 | Mexer no banco (tabelas, RLS)        | [SUPABASE.md](./SUPABASE.md)                             |
 | Saber as convenções de código        | [CONVENTIONS.md](./CONVENTIONS.md)                       |
 | Escrever testes                      | [TESTING.md](./TESTING.md)                               |
+| Importar o histórico de cashback     | [IMPORT.md](./IMPORT.md)                                 |
 | Ver o roadmap dos 13 módulos         | [ROADMAP.md](./ROADMAP.md)                               |
 
 ## Skills (use no Claude Code com `/`)

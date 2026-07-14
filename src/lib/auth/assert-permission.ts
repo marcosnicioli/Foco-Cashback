@@ -9,7 +9,7 @@ import { getCurrentUserRole } from "./current-user";
  *
  * Chame no INÍCIO de toda action de escrita, ANTES de tocar no banco:
  *
- *   const denied = await assertPermission<MyResult>("clients.write");
+ *   const denied = await assertPermission<MyResult>("withdraw.approve");
  *   if (denied) return denied;
  *
  * Retorna `null` se autorizado, ou um `ActionResult` `forbidden` para o caller
